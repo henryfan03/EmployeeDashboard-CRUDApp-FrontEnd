@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 
 import { 
-  fetchAllCoursesThunk,
-  deleteCourseThunk
+  fetchAllTasksThunk,
+  deleteTaskThunk
 } from '../../store/thunks';
 
 import AllCoursesView from '../views/AllCoursesView';
@@ -35,8 +35,8 @@ const mapState = (state) => {
 // Map dispatch to props;
 const mapDispatch = (dispatch) => {
   return {
-    fetchAllCourses: () => dispatch(fetchAllCoursesThunk()),
-    deleteCourse: (courseId) => dispatch(deleteCourseThunk(courseId)),
+    fetchAllCourses: () => dispatch(fetchAllTasksThunk()),
+    deleteCourse: (courseId) => dispatch(deleteTaskThunk(courseId)),
   };
 };
 

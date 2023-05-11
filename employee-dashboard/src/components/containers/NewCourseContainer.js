@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import NewCourseView from '../views/NewCourseView';
-import { addCourseThunk } from '../../store/thunks';
+import { addTaskThunk } from '../../store/thunks';
 
 
 class NewCourseContainer extends Component {
@@ -70,7 +70,7 @@ class NewCourseContainer extends Component {
 
 const mapDispatch = (dispatch) => {
     return({
-        addCourse: (course) => dispatch(addCourseThunk(course)),
+        addCourse: (course) => dispatch(addTaskThunk(course)),
     })
 }
 

@@ -2,38 +2,38 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
-import { fetchCourseThunk, editCourseThunk, fetchAllInstructorsThunk  } from '../../store/thunks';
+import { fetchTaskThunk, editTaskThunk, fetchAllEmployeesThunk  } from '../../store/thunks';
 
 
 /*
 IMPORTANT: comments regarding implementation details!!
 =====================================================
 You'll see that we have two ways of interacting with the UI
-in order to change the course's instructor
+in order to change the course's employee
 
 The dropdown menu is straighforward, it's pretty much the same 
 as having the input field for the instructorId but allows us
 to actually see the available insutrctors as well as their names, 
-not just their IDs. We did have to connect to the allInstructors state
-from the Redux store, as well as fetchAllInstructors in componentDidMount().
+not just their IDs. We did have to connect to the allEmployees state
+from the Redux store, as well as fetchAllEmployees in componentDidMount().
 This was done so we could get the other instructors in the database.
-We filter out the current instructor from the array at the beginning of 
+We filter out the current employee from the array at the beginning of
 the render function, and use this array to populate the dropdown menu
 options. Because it's part of the form, we don't need to modify the 
 handleSubmit function. On redirect to the CourseView we will see the 
 updates.
 
 You will see below the form there is another part of the UI that is
-also changing the current course's instructor. This structure is similar
+also changing the current course's employee. This structure is similar
 to how changing assigned courses is done in the InstrutcorView. There is
 a slight drawback to using this approach in this context. When we perform
-an EDIT_COURSE action (initiated by calling the editCourseThunk), this action
-is sent to the allCourses reducer, not the course reducer. For that reason, 
+an EDIT_COURSE action (initiated by calling the editTaskThunk), this action
+is sent to the allTasks reducer, not the course reducer. For that reason,
 we will not see the updates in the single course view unless there is another 
-call to the fetchCourseThunk. This is done once when we redirect after form
+call to the fetchTaskThunk. This is done once when we redirect after form
 submission, which is why the data is shown without needing to refresh. 
 If we want that same functionality within the container, we need to make
-a call to fetchCourse after each editCourse. We see that in the onClick
+a call to fetchTask after each editCourse. We see that in the onClick
 functionality of the buttons controlling that portion of the UI. 
 
 */
@@ -72,7 +72,7 @@ class EditCourseContainer extends Component {
       //handle change for the dropdown menu
       //want to set the instructorId based on the selected choice
       //when the form gets submitted, this is how we can change
-      //assigned instructor without having to manually enter in the 
+      //assigned employee without having to manually enter in the
       //instructorId like before
       if (event.target.value === "staff") {
         this.setState({instructorId:null});
@@ -188,9 +188,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return({
-        editCourse: (course) => dispatch(editCourseThunk(course)),
-        fetchCourse: (id) => dispatch(fetchCourseThunk(id)),
-        fetchInstructors: () => dispatch(fetchAllInstructorsThunk()),
+        editCourse: (course) => dispatch(editTaskThunk(course)),
+        fetchCourse: (id) => dispatch(fetchTaskThunk(id)),
+        fetchInstructors: () => dispatch(fetchAllEmployeesThunk()),
 
     })
 }
