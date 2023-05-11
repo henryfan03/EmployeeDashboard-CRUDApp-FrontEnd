@@ -1,19 +1,37 @@
-// import logo from './logo.svg';
-import {Routes, Route, Link} from "react-router-dom";
-import './App.css';
+import "./App.css";
 
-function App(props) {
-  return (
-      <div className="App">
-        <div>
-          <h1>Hello, world!</h1>
-          <Routes>
-            {/*<Route index element={<Home/>}/>;*/}
-            {/*<Route path="about" element={<About/>}/>;*/}
-          </Routes>
+//Router
+import { Switch, Route } from "react-router-dom";
+//Components
+import {
+    HomePageContainer,
+    EmployeeContainer,
+    TaskContainer,
+    AllEmployeesContainer,
+    AllTasksContainer,
+    NewTaskContainer,
+    EditTaskContainer,
+    NewEmployeeContainer,
+    EditEmployeeContainer
+} from './components/containers';
+
+
+const App = () => {
+    return (
+        <div className="App">
+            <Switch>
+                <Route exact path="/" component={HomePageContainer} />
+                <Route exact path="/employee" component={AllEmployeesContainer} />
+                <Route exact path="/employees/:id" component={EmployeeContainer} />
+                <Route exact path="/tasks" component={AllTasksContainer} />
+                <Route exact path="/newtask" component={NewTaskContainer} />
+                <Route exact path="/tasks/:id" component={TaskContainer} />
+                <Route exact path="/edittask/:id" component={EditTaskContainer} />
+                <Route exact path="/newemployee" component={NewEmployeeContainer} />
+                <Route exact path="/editemployee/:id" component={EditEmployeeContainer} />
+            </Switch>
         </div>
-      </div>
-  );
+    );
 }
 
 export default App;
