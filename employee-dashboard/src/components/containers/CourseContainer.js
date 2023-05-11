@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchCourseThunk } from "../../store/thunks";
+import { fetchTaskThunk } from "../../store/thunks";
 import { CourseView } from "../views";
 
 class CourseContainer extends Component {
@@ -28,7 +28,7 @@ const mapState = (state) => {
 // map dispatch to props
 const mapDispatch = (dispatch) => {
   return {
-    fetchCourse: (id) => dispatch(fetchCourseThunk(id)),
+    fetchCourse: (id) => dispatch(fetchTaskThunk(id)),
   };
 };
 

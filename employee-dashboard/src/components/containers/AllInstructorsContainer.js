@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllInstructorsThunk } from "../../store/thunks";
+import { fetchAllEmployeesThunk } from "../../store/thunks";
 import { AllInstructorsView } from "../views";
 
 function AllInstructorsContainer() {
@@ -9,7 +9,7 @@ function AllInstructorsContainer() {
 
   //replaces componentDidMount
   useEffect(() => {
-    dispatch(fetchAllInstructorsThunk());
+    dispatch(fetchAllEmployeesThunk());
   }, [dispatch]);
 
   return <AllInstructorsView allInstructors={allInstructors} />;
