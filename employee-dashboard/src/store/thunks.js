@@ -1,12 +1,15 @@
 import * as ac from './actions/actionCreators';
-const axios = require('axios');
+// const axios = require('axios');
+// import * as axios from 'axios';
+// import axios, * as others from 'axios';
+import axios from "axios";
 
 //PATH (should be where your server is running)
 let path = "http://localhost:5001/api";
 
 // THUNKS
 
-//All instructors
+//All employees
 export const fetchAllEmployeesThunk = () => async (dispatch) => {
   try {
     let res = await axios.get(`${path}/employees`);
@@ -21,7 +24,7 @@ export const fetchEmployeeThunk = (id) => async (dispatch) => {
   // thunk creator would not an be async function 
   // if using Promise.then:
   // return axios
-  //   .get(`${path}/api/instructors/${id}`)
+  //   .get(`${path}/api/employees/${id}`)
   //   .then((res) => res.data)
   //   .then((employee) => dispatch(ac.fetchEmployee(employee)))
   //   .catch((err) => console.log(err));
@@ -33,7 +36,7 @@ export const fetchEmployeeThunk = (id) => async (dispatch) => {
   }
 };
 
-//All courses
+//All tasks
 export const fetchAllTasksThunk = () => async (dispatch) => {
   try {
     let res = await axios.get(`${path}/tasks`);
@@ -43,10 +46,10 @@ export const fetchAllTasksThunk = () => async (dispatch) => {
   }
 };
 
-export const addTaskThunk = (course) => async (dispatch) => {
-  // course = { title: "CSCI 127" }
+export const addTaskThunk = (task) => async (dispatch) => {
+  // task = { title: "CSCI 127" }
   try {
-    let res = await axios.post(`${path}/tasks`, course);
+    let res = await axios.post(`${path}/tasks`, task);
     dispatch(ac.addTask(res.data));
     return res.data;
   } catch(err) {
@@ -67,14 +70,14 @@ export const deleteTaskThunk = taskId => async dispatch => {
 export const editTaskThunk = task => async dispatch => {
   try {
     let res = await axios.put(`${path}/tasks/${task.id}`, task);
-    //res.data is the updated course object
+    //res.data is the updated task object
     dispatch(ac.editTask(res.data));
   } catch(err) {
     console.error(err);
   }
 };
 
-//Single course
+//Single task
 export const fetchTaskThunk = id => async dispatch => {
   try {
     let res = await axios.get(`${path}/tasks/${id}`);
