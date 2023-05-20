@@ -44,7 +44,7 @@ export const deleteTask = (taskId) => {
 };
 
 
-export const editCourse = (task) => {
+export const editTask = (task) => {
   return {
     type: at.EDIT_TASK,
     payload: task,
