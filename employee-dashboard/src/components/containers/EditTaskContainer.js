@@ -42,12 +42,13 @@ class EditTaskContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-          title: "", 
-          timeslot: "",
-          employeeId: null, 
-          redirect: false, 
+          description: "",
+          priority: "",
+          employeeId: null,
+          redirect: false,
           redirectId: null,
-          error: ""
+          error: "",
+          isComplete: false
         };
     }
 
@@ -56,9 +57,9 @@ class EditTaskContainer extends Component {
         this.props.fetchTask(this.props.match.params.id);
         this.props.fetchEmployees();
         this.setState({
-            title: this.props.task.title, 
-            timeslot: this.props.task.timeslot,
-            employeeId: this.props.task.employeeId, 
+            description: this.props.task.description,
+            priority: this.props.task.priority,
+            employeeId: this.props.task.employeeId,
         });
       }
 
@@ -84,23 +85,23 @@ class EditTaskContainer extends Component {
     handleSubmit = event => {
         event.preventDefault();
         //implementing form validation
-        if (this.state.title === "") {
-          this.setState({error: "Error: title cannot be empty"});
+        if (this.state.description === "") {
+          this.setState({error: "Error: description cannot be empty"});
           return;
         }
 
         //get new info for task from form input
         let task = {
             id: this.props.task.id,
-            title: this.state.title,
-            timeslot: this.state.timeslot,
+            description: this.state.description,
+            priority: this.state.priority,
             employeeId: this.state.employeeId
         };
-        
+
         this.props.editTask(task);
 
         this.setState({
-          redirect: true, 
+          redirect: true,
           redirectId: this.props.task.id
         });
 
@@ -116,7 +117,7 @@ class EditTaskContainer extends Component {
         let assignedEmployee = task.employeeId;
 
         let otherEmployees = allEmployees.filter(employee => employee.id!==assignedEmployee);
-      
+
         //go to single task view of the edited task
         if(this.state.redirect) {
           return (<Redirect to={`/task/${this.state.redirectId}`}/>)
@@ -125,12 +126,12 @@ class EditTaskContainer extends Component {
         return (
         <div>
         <form style={{textAlign: 'center'}} onSubmit={(e) => this.handleSubmit(e)}>
-            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Title: </label>
-            <input type="text" name="title" value={this.state.title || ''} placeholder={task.title} onChange ={(e) => this.handleChange(e)}/>
+            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Description: </label>
+            <input type="text" name="description" value={this.state.description || ''} placeholder={task.description} onChange ={(e) => this.handleChange(e)}/>
             <br/>
 
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Timeslot: </label>
-            <input type="text" name="timeslot" value={this.state.timeslot || ''} placeholder={task.timeslot} onChange={(e) => this.handleChange(e)}/>
+            <label style={{color:'#11153e', fontWeight: 'bold'}}>Priority: </label>
+            <input type="text" name="priority" value={this.state.priority || ''} placeholder={task.priority} onChange={(e) => this.handleChange(e)}/>
             <br/>
 
             <select onChange={(e) => this.handleSelectChange(e)}>
@@ -145,7 +146,7 @@ class EditTaskContainer extends Component {
               })}
               {task.employee!==null && <option value="staff">Staff</option>}
             </select>
-  
+
             <button type="submit">
               Submit
             </button>
@@ -154,7 +155,7 @@ class EditTaskContainer extends Component {
           { this.state.error !=="" && <p>{this.state.error}</p> }
 
           {task.employeeId !== null ?
-            <div> Current employee:  
+            <div> Current employee:
             <Link to={`/employee/${task.employeeId}`}>{task.employee.firstname}</Link>
             <button onClick={async () => {await editTask({id:task.id, employeeId: null});  fetchTask(task.id)}}>Unassign</button>
             </div>
