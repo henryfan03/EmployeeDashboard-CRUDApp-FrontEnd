@@ -8,7 +8,7 @@ const allEmployees = (state = [], action) => {
     case at.ADD_EMPLOYEE:
       return [...state, action.payload]
     case at.DELETE_EMPLOYEE:
-      return state.filter(employee => employee.id === action.payload);
+      return state.filter(employee => employee.id !== action.payload);
     case at.EDIT_EMPLOYEE:
       return state.map(employee => {
         return (
