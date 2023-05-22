@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { 
   fetchEmployeeThunk,
   fetchAllTasksThunk,
-  editTaskThunk
+  editTaskThunk,
+  editEmployeeThunk
 } from "../../store/thunks";
 
 import { EmployeeView } from "../views";
@@ -41,7 +42,7 @@ const mapDispatch = (dispatch) => {
     fetchEmployee: (id) => dispatch(fetchEmployeeThunk(id)),
     editTask: (task) => dispatch(editTaskThunk(task)),
     fetchTasks: () => dispatch(fetchAllTasksThunk()),
-
+    editEmployee: (employee) => dispatch(editEmployeeThunk(employee))
   };
 };
 
