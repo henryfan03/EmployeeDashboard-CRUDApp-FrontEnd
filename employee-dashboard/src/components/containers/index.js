@@ -6,4 +6,7 @@ export { default as AllTasksContainer } from "./AllTasksContainer";
 export { default as TaskContainer } from "./TaskContainer";
 export { default as NewTaskContainer } from "./NewTaskContainer";
 export { default as EditTaskContainer } from "./EditTaskContainer";
+export { default as NewEmployeeContainer } from "./NewEmployeeContainer";
+// export { default as RemoveEmployeeContainer } from "./RemoveEmployeeContainer";
+export { default as EditEmployeeContainer } from "./EditEmployeeContainer";
 
