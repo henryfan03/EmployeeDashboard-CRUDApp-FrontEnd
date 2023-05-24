@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import {CButton} from "@coreui/react";
 
 const AllEmployeesView = (props) => {
   // let {employees, deleteEmployee} = props;
@@ -26,12 +27,18 @@ const AllEmployeesView = (props) => {
             <h1>{name}</h1>
           </Link>
           <p>{employee.department}</p>
-          <button onClick={() => props.deleteEmployee(employee.id)}>Delete</button>
+              <CButton variant="outline" color="danger" onClick={() => props.deleteEmployee(employee.id)}>
+                  Remove Employee
+              </CButton>
         </div>
         );
       })}
+        <br/>
+        <br/>
       <Link to={`/newemployee`}>
-        <button>Add New Employee</button>
+          <CButton variant="outline">
+              Add New Employee
+          </CButton>
       </Link>
     </div>
   );
