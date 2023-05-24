@@ -35,10 +35,11 @@ const AllEmployeesView = (props) => {
               <CButton variant="outline" color="danger" onClick={() => props.deleteEmployee(employee.id)}>
                   Remove Employee
               </CButton>
+              <br/>
+              <br/>
         </div>
         );
       })}
-        <br/>
         <br/>
       <Link to={`/newemployee`}>
           <CButton variant="outline">
