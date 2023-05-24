@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {CButton} from "@coreui/react";
+import {CButton, CAlert} from "@coreui/react";
 
 const AllTasksView = (props) => {
   let {tasks, deleteTask} = props;
@@ -7,9 +7,15 @@ const AllTasksView = (props) => {
   if (!tasks.length) {
     return (
     <div>
-      <p>There are no tasks.</p>
+      {/*<p>There are no tasks.</p>*/}
+        <CAlert color="warning">
+            There are currently no tasks! You can add some with the button below.
+        </CAlert>
       <Link to={`/newtask`}>
-        <button>Add New Task</button>
+          <CButton variant="outline">
+              Add New Task
+          </CButton>
+        {/*<button>Add New Task</button>*/}
       </Link>
     </div>
     );
