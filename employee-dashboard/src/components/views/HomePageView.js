@@ -1,16 +1,26 @@
 
 
 import { Link } from 'react-router-dom';
+import {CButton} from "@coreui/react";
 
 
 
 const HomePageView = () => {
   return (
     <div>
-      <h6>Final Project</h6>
+      <h1>Employee Management System</h1>
       {/*<Link to={'/homepage'} > Homepage </Link>*/}
-      <Link to={'/employees'} > All Employees </Link>
-      <Link to={'/tasks'} > All Tasks </Link>
+      <Link to={'/employees'} >
+          <CButton variant="outline">
+          View Employees
+          </CButton>
+      </Link>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <Link to={'/tasks'} >
+          <CButton variant="outline">
+              View Tasks
+          </CButton>
+      </Link>
 
     </div>
   );    
