@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
+import { CButton, CFormFloating, CFormLabel, CFormInput, CFormText, CForm, CFormSelect } from '@coreui/react';
 
 import { fetchTaskThunk, editTaskThunk, fetchAllEmployeesThunk  } from '../../store/thunks';
 
@@ -125,51 +126,70 @@ class EditTaskContainer extends Component {
 
         return (
         <div>
-        <form style={{textAlign: 'center'}} onSubmit={(e) => this.handleSubmit(e)}>
-            <label style= {{color:'#11153e', fontWeight: 'bold'}}>Description: </label>
-            <input type="text" name="description" value={this.state.description || ''} placeholder={task.description} onChange ={(e) => this.handleChange(e)}/>
+            <CForm style={{textAlign: 'center'}} onSubmit={(e) => this.handleSubmit(e)}>
+                <CFormLabel htmlFor="exampleFormControlInput1">Description</CFormLabel>
+                <CFormInput type="text" name="description" value={this.state.description || ''} placeholder={task.description} onChange ={(e) => this.handleChange(e)} />
+                <br/>
+                <br/>
+                <CFormLabel htmlFor="exampleFormControlInput1">Priority</CFormLabel>
+                {/*<CFormInput type="text" name="priority" value={this.state.priority || ''} placeholder={task.priority} onChange ={(e) => this.handleChange(e)} />*/}
+                <CFormSelect onChange={(e) => this.handleSelectChange(e)}
+                    aria-label="Select Priority"
+                    options={[
+                        { label: 'Low', value: 'Low' },
+                        { label: 'Medium', value: 'Medium' },
+                        { label: 'High', value: 'High'}
+                    ]}
+                />
+                <br/>
+                <br/>
+                <CFormLabel htmlFor="exampleFormControlInput1">Currently assigned to:</CFormLabel>
+                <CFormSelect onChange={(e) => this.handleSelectChange(e)}>
+                    {task.employee!==null ?
+                        <option value={task.employeeId}>{task.employee.firstname+" (current)"}</option>
+                        : <option value="staff">Staff</option>
+                    }
+                    {otherEmployees.map(employee => {
+                        return (
+                            <option value={employee.id} key={employee.id}>{employee.firstname}</option>
+                        )
+                    })}
+                    {task.employee!==null && <option value="staff">Staff</option>}
+                </CFormSelect>
+                <br/>
+                <br/>
+
+                <CButton variant="outline" type="submit">
+                    Submit
+                </CButton>
+            </CForm>
             <br/>
-
-            <label style={{color:'#11153e', fontWeight: 'bold'}}>Priority: </label>
-            <input type="text" name="priority" value={this.state.priority || ''} placeholder={task.priority} onChange={(e) => this.handleChange(e)}/>
             <br/>
-
-            <select onChange={(e) => this.handleSelectChange(e)}>
-              {task.employee!==null ?
-                <option value={task.employeeId}>{task.employee.firstname+" (current)"}</option>
-              : <option value="staff">Staff</option>
-              }
-              {otherEmployees.map(employee => {
-                return (
-                  <option value={employee.id} key={employee.id}>{employee.firstname}</option>
-                )
-              })}
-              {task.employee!==null && <option value="staff">Staff</option>}
-            </select>
-
-            <button type="submit">
-              Submit
-            </button>
-
-          </form>
           { this.state.error !=="" && <p>{this.state.error}</p> }
 
           {task.employeeId !== null ?
-            <div> Current employee:
-            <Link to={`/employee/${task.employeeId}`}>{task.employee.firstname}</Link>
-            <button onClick={async () => {await editTask({id:task.id, employeeId: null});  fetchTask(task.id)}}>Unassign</button>
+            <div> Current employee:&nbsp;
+            <Link to={`/employees/${task.employeeId}`}>{task.employee.firstname}</Link>
+                &nbsp;
+                <CButton variant="outline" color="danger" onClick={async () => {await editTask({id:task.id, employeeId: null});  fetchTask(task.id)}}>
+                    Unassign
+                </CButton>
             </div>
             : <div> No employee currently assigned </div>
           }
 
+          <br/>
           <div> Other employees
           {otherEmployees.map(employee => {
             return (
             <div key={employee.id}>
-                <Link to={`/employee/${employee.id}`}>
+                <Link to={`/employees/${employee.id}`}>
                   <h4>{employee.firstname}</h4>
                 </Link>
-                <button onClick={async() => {await editTask({id:task.id, employeeId: employee.id}); fetchTask(task.id)}}>Assign this employee</button>
+                <CButton variant="outline" onClick={async() => {await editTask({id:task.id, employeeId: employee.id}); fetchTask(task.id)}}>
+                    Assign this employee
+                </CButton>
+                {/*<button onClick={async() => {await editTask({id:task.id, employeeId: employee.id}); fetchTask(task.id)}}>Assign this employee</button>*/}
             </div>
             )})
           }
