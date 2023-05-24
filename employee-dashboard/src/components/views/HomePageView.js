@@ -1,7 +1,7 @@
 
 
 import { Link } from 'react-router-dom';
-import {CButton} from "@coreui/react";
+import {CButton, CBadge} from "@coreui/react";
 
 
 
