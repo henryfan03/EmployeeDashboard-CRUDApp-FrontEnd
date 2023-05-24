@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import {CButton} from "@coreui/react";
 
 
 const EmployeeView = (props) => {
@@ -19,7 +20,9 @@ const EmployeeView = (props) => {
             <Link to={`/task/${task.id}`}>
               <h4>{task.description}</h4>
             </Link>
-            <button onClick={() => editTask({id:task.id, employeeId: null})}>x</button>
+                <CButton color="danger" onClick={() => editTask({id:task.id, employeeId: null})}>
+                    X
+                </CButton>
             </div>
           );
         })}</div>
@@ -30,7 +33,9 @@ const EmployeeView = (props) => {
             <Link to={`/task/${task.id}`}>
               <h4>{task.description}</h4>
             </Link>
-            <button onClick={() => editTask({id:task.id, employeeId: employee.id})}>+</button>
+                <CButton onClick={() => editTask({id:task.id, employeeId: employee.id})}>
+                    +
+                </CButton>
             </div>
           );
         })}</div>
