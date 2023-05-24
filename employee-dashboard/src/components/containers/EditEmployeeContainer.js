@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
+import { CButton, CFormFloating, CFormLabel, CFormInput, CFormText, CForm } from '@coreui/react';
 
 import { fetchEmployeeThunk, editEmployeeThunk, fetchAllEmployeesThunk  } from '../../store/thunks';
 
@@ -132,59 +133,56 @@ class EditEmployeeContainer extends Component {
 
         return (
             <div>
-                <form style={{textAlign: 'center'}} onSubmit={(e) => this.handleSubmit(e)}>
-                    <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
-                    <input type="text" name="firstname" value={this.state.firstname || ''} placeholder={employee.firstname} onChange ={(e) => this.handleChange(e)}/>
+                <CForm style={{textAlign: 'center'}} onSubmit={(e) => this.handleSubmit(e)}>
+                    <CFormLabel htmlFor="exampleFormControlInput1">First Name</CFormLabel>
+                    <CFormInput type="text" name="firstname" value={this.state.firstname || ''} placeholder={employee.firstname} onChange ={(e) => this.handleChange(e)} />
+                    <CFormText component="span" id="exampleFormControlInputHelpInline">
+                        Cannot be empty.
+                    </CFormText>
+                    <br/>
+                    <br/>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Last Name</CFormLabel>
+                    <CFormInput type="text" name="lastname" value={this.state.lastname || ''} placeholder={employee.lastname} onChange ={(e) => this.handleChange(e)} />
+                    <CFormText component="span" id="exampleFormControlInputHelpInline">
+                        Cannot be empty.
+                    </CFormText>
+                    <br/>
+                    <br/>
+                    <CFormLabel htmlFor="exampleFormControlInput1">Department</CFormLabel>
+                    <CFormInput type="text" name="department" value={this.state.department || 'None'} placeholder={employee.department} onChange={(e) => this.handleChange(e)} />
+                    <br/>
                     <br/>
 
-                    <label style= {{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>
-                    <input type="text" name="lastname" value={this.state.lastname || ''} placeholder={employee.lastname} onChange ={(e) => this.handleChange(e)}/>
-                    <br/>
-
-                    <label style={{color:'#11153e', fontWeight: 'bold'}}>Department: </label>
-                    <input type="text" name="department" value={this.state.department || 'None'} placeholder={employee.department} onChange={(e) => this.handleChange(e)}/>
-                    <br/>
-
-                    {/*<select onChange={(e) => this.handleSelectChange(e)}>*/}
-                    {/*    {employee.employee!==null ?*/}
-                    {/*        <option value={employee.employeeId}>{employee.employee.firstname+" (current)"}</option>*/}
-                    {/*        : <option value="staff">Staff</option>*/}
-                    {/*    }*/}
-                    {/*    /!*{otherEmployees.map(employee => {*!/*/}
-                    {/*    /!*    return (*!/*/}
-                    {/*    /!*        <option value={employee.id} key={employee.id}>{employee.firstname}</option>*!/*/}
-                    {/*    /!*    )*!/*/}
-                    {/*    /!*})}*!/*/}
-                    {/*    {employee.employee!==null && <option value="staff">Staff</option>}*/}
-                    {/*</select>*/}
-
-                    <button type="submit">
+                    <CButton variant="outline" type="submit">
                         Submit
-                    </button>
+                    </CButton>
+                </CForm>
+                {/*<form style={{textAlign: 'center'}} onSubmit={(e) => this.handleSubmit(e)}>*/}
+                {/*    /!*<CFormInput type="email" id="floatingInput" floatingClassName="mb-3" floatingLabel="Email address" placeholder="name@example.com" />*!/*/}
+                {/*    /!*<CFormInput type="password" id="floatingPassword" floatingLabel="Password" placeholder="Password" />*!/*/}
 
-                </form>
+                {/*    <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>*/}
+                {/*    <input type="text" name="firstname" value={this.state.firstname || ''} placeholder={employee.firstname} onChange ={(e) => this.handleChange(e)}/>*/}
+                {/*    <br/>*/}
+                {/*    <br/>*/}
+
+                {/*    <label style= {{color:'#11153e', fontWeight: 'bold'}}>Last Name: </label>*/}
+                {/*    <input type="text" name="lastname" value={this.state.lastname || ''} placeholder={employee.lastname} onChange ={(e) => this.handleChange(e)}/>*/}
+                {/*    <br/>*/}
+                {/*    <br/>*/}
+
+                {/*    <label style={{color:'#11153e', fontWeight: 'bold'}}>Department: </label>*/}
+                {/*    <input type="text" name="department" value={this.state.department || 'None'} placeholder={employee.department} onChange={(e) => this.handleChange(e)}/>*/}
+                {/*    <br/>*/}
+                {/*    <br/>*/}
+
+                {/*    <CButton variant="outline" type="submit">*/}
+                {/*        Submit*/}
+                {/*    </CButton>*/}
+
+                {/*</form>*/}
                 { this.state.error !=="" && <p>{this.state.error}</p> }
 
-                {/*{employee.employeeId !== null ?*/}
-                {/*    <div> Current employee:*/}
-                {/*        <Link to={`/employee/${employee.employeeId}`}>{employee.employee.firstname}</Link>*/}
-                {/*        <button onClick={async () => {await editEmployee({id:employee.id, employeeId: null});  fetchEmployee(employee.id)}}>Unassign</button>*/}
-                {/*    </div>*/}
-                {/*    // : <div> No employee currently assigned </div>*/}
-                {/*}*/}
-
-                {/*<div> Other employees*/}
-                {/*    {otherEmployees.map(employee => {*/}
-                {/*        return (*/}
-                {/*            <div key={employee.id}>*/}
-                {/*                <Link to={`/employee/${employee.id}`}>*/}
-                {/*                    <h4>{employee.firstname}</h4>*/}
-                {/*                </Link>*/}
-                {/*                <button onClick={async() => {await editEmployee({id:employee.id, employeeId: employee.id}); fetchEmployee(employee.id)}}>Assign this employee</button>*/}
-                {/*            </div>*/}
-                {/*        )})*/}
-                {/*    }*/}
-                {/*</div>*/}
             </div>
         )
     }
