@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import {CButton} from "@coreui/react";
+import {CButton, CAlert} from "@coreui/react";
 
 const AllEmployeesView = (props) => {
   // let {employees, deleteEmployee} = props;
@@ -8,9 +8,14 @@ const AllEmployeesView = (props) => {
   if (!props.employees.length) {
     return (
         <div>
-            <p>There are no employees.</p>
+            {/*<p>There are no employees.</p>*/}
+            <CAlert color="warning">
+                There are currently no employees! You can add some with the button below.
+            </CAlert>
             <Link to={`/newemployee`}>
-                <button>Add New Employee</button>
+                <CButton variant="outline">
+                    Add New Employee
+                </CButton>
             </Link>
         </div>
 
