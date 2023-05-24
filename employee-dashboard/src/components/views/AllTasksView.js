@@ -33,6 +33,8 @@ const AllTasksView = (props) => {
             <CButton variant="outline" color="danger" onClick={() => deleteTask(task.id)}>
               Delete Task
             </CButton>
+              <br />
+              <br />
           </div>
         );
       }
