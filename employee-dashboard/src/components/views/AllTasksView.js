@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import {CButton} from "@coreui/react";
 
 const AllTasksView = (props) => {
   let {tasks, deleteTask} = props;
@@ -23,13 +24,19 @@ const AllTasksView = (props) => {
           <Link to={`/task/${task.id}`}>
             <h1>{description}</h1>
           </Link>
-          <button onClick={() => deleteTask(task.id)}>Delete</button>
+            <CButton variant="outline" color="danger" onClick={() => deleteTask(task.id)}>
+              Delete Task
+            </CButton>
           </div>
         );
       }
       )}
+      <br/>
+      <br/>
       <Link to={`/newtask`}>
-        <button>Add New Task</button>
+        <CButton variant="outline">
+          Add New Task
+        </CButton>
       </Link>
     </div>
   );
