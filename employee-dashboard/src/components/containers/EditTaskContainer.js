@@ -132,15 +132,15 @@ class EditTaskContainer extends Component {
                 <br/>
                 <br/>
                 <CFormLabel htmlFor="exampleFormControlInput1">Priority</CFormLabel>
-                {/*<CFormInput type="text" name="priority" value={this.state.priority || ''} placeholder={task.priority} onChange ={(e) => this.handleChange(e)} />*/}
-                <CFormSelect onChange={(e) => this.handleSelectChange(e)}
-                    aria-label="Select Priority"
-                    options={[
-                        { label: 'Low', value: 'Low' },
-                        { label: 'Medium', value: 'Medium' },
-                        { label: 'High', value: 'High'}
-                    ]}
-                />
+                <CFormInput type="text" name="priority" value={this.state.priority || ''} placeholder={task.priority} onChange ={(e) => this.handleChange(e)} />
+                {/*<CFormSelect onChange={(e) => this.handleSelectChange(e)}*/}
+                {/*    aria-label="Select Priority"*/}
+                {/*    options={[*/}
+                {/*        { label: 'Low', value: 'Low' },*/}
+                {/*        { label: 'Medium', value: 'Medium' },*/}
+                {/*        { label: 'High', value: 'High'}*/}
+                {/*    ]}*/}
+                {/*/>*/}
                 <br/>
                 <br/>
                 <CFormLabel htmlFor="exampleFormControlInput1">Currently assigned to:</CFormLabel>
